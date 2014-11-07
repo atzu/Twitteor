@@ -12,9 +12,9 @@ Posts = new Meteor.Collection('posts');
         access_token_secret: conf.access_token_secret
     });
 
-    sanFrancisco = [ '-122.75', '36.8', '-121.75', '37.8' ];
+    var city_area = [ '-5.85', '43.37', '-4.85', '44.37' ]
 
-    stream = T.stream('statuses/filter', { locations: sanFrancisco });
+    stream = T.stream('statuses/filter', { locations: city_area });
 
     stream.on('tweet', function (tweet) {
         userName = tweet.user.screen_name;
