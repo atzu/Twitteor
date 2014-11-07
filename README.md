@@ -7,8 +7,9 @@ Configuring Twitter API
 ========================
 
 Create a private /folder with the following file api_keys.json
-
- "consumer_key": "xxxxxxxxxxxxxxxxxxxx",
- "consumer_secret": "xxxxxxxxxxxxxxxxxxxxxxxx",
- "access_token": "xxxxxxxxxxxxxxxxxxxxxxxxxx",
- "access_token_secret": "xxxxxxxxxxxxxxxxxxxxxxxx"
+  {
+   "consumer_key": "xxxxxxxxxxxxxxxxxxxx",
+   "consumer_secret": "xxxxxxxxxxxxxxxxxxxxxxxx",
+   "access_token": "xxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "access_token_secret": "xxxxxxxxxxxxxxxxxxxxxxxx"
+  }
