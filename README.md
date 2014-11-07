@@ -6,7 +6,7 @@ Twitter Streaming API Meteor client
 Configuring Twitter API
 ========================
 
-Create a private /folder with the following file api_keys.json  
+Create a /private named folder with the following file api_keys.json  
 
   {  
   
