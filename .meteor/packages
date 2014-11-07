@@ -1,0 +1,20 @@
+# Meteor packages used by this project, one per line.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-platform
+mizzao:bootstrap-3
+zimme:iron-router-active
+accounts-password
+less
+useraccounts:bootstrap
+service-configuration
+accounts-ui
+accounts-twitter
+
+
+npm-container
+mrt:twit
+meteorhacks:npm
+
