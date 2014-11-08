@@ -1,7 +1,13 @@
 <template name="private">
   <div class="container">   
     <div class="text-center">
-      <h1>This is private stuff!</h1>
+      <div class="col-md-9 col-lg-9 tweet-list">
+      <ul class="list-group">
+      	{{#each tweets}}
+      		<li class="list-group-item"><div class="tweet"><img class="photo" src={{profilePhoto}}/><span class="username">{{username}}</span><br/> <div class="tweet-text"> {{userTweet}}</div></div></li>
+      	{{/each}}
+      </ul>
+  	</div>
     </div>
   </div>
 </template>

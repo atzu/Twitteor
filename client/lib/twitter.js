@@ -4,4 +4,15 @@
     //console.log(results); //results.data should be a JSON object
   //});
 
-  Meteor.subscribe("Posts");
+ Meteor.call('twitsByLocation', 1, function(e, r) {
+ 		console.log('chiamato');
+      });
+
+Meteor.subscribe('tweets');
+
+
+Template.private.helpers({
+    'tweets': function(){
+        return Tweets.find({}, {sort: {"creationDate": -1}});
+    }
+});

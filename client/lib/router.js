@@ -3,8 +3,8 @@ Router.configure({
     loadingTemplate: 'loading',
     notFoundTemplate: 'pageNotFound',
     yieldTemplates: {
-        nav: {to: 'nav'},
-        footer: {to: 'footer'},
+    nav: {to: 'nav'},
+    footer: {to: 'footer'},
     }
 });
 
