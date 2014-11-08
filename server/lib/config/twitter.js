@@ -1,4 +1,6 @@
-
+ Meteor.publish('tweets', function(){
+        return Tweets.find({}, {sort: {"creationDate": -1}, limit: 20});
+    });
 
     Meteor.startup(function () {
     // code to run on server at startup
@@ -6,19 +8,13 @@
     Tweets.insert({"username": tweet.user.screen_name , "userTweet" : tweet.text, "profilePhoto": tweet.user.profile_image_url, "creationDate" : tweet.created_at});
   }, "Failed to insert tweet into Posts collection.");
 
-    Meteor.publish('tweets', function(){
-        return Tweets.find({}, {sort: {"creationDate": -1}, limit: 20});
-    });
+   
 
 
 
     //Methods
 
      Meteor.methods({
-      test: function(arg) {
-        console.log('testero'+arg);
-        return 'test'+arg;
-      },
 
       twitsByLocation:  function(arg){
         var Twit = Meteor.npmRequire('twit');
