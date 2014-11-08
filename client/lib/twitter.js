@@ -21,6 +21,7 @@ Template.private.events({
 		Meteor.call('twitsByHashtag', user_id, hashtag , function(e, r) {
 			console.log('chiamato');
     	});
+    	$('#tag-name').html("Hashtag: "+hashtag);
 	}		
 	});
 
@@ -34,7 +35,7 @@ Template.nav.events({
 'click #private': function (event) {
 var hashtag=document.getElementById('hashtag').value;
 var user_id=Meteor.userId();
-document.getElementById('tag-name').innerHTML=hashtag;
+$('#tag-name').html("Hashtag: "+hashtag);
  Meteor.call('twitsByHashtag', user_id, hashtag, function(e, r) {
       });
 },

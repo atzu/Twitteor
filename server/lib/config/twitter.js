@@ -80,8 +80,10 @@
                console.log('found users stream');
                stream=stream_array[user_id];
                stream.stop();
+               delete stream_array[user_id];
                console.log('stopped');
                stream = T.stream('statuses/filter', { track: hashtag });
+               stream_array[user_id]=stream;
                console.log('reopened with hash, '+hashtag); 
             }
             stream.on('tweet', function (tweet, user_id) {
