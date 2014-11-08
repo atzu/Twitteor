@@ -32,11 +32,22 @@ body {
   }
 }
 
+.spacing{
+  margin-top:5px;
+}
+
 .photo{
   float:left;
 }
 .tweet{
   height:60px;
+}
+.blurry{
+  -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
 }
 .username{
   float:left;
@@ -45,9 +56,10 @@ body {
 }
 .tweet-text{
   position:relative;
-  font-size:11px;
-  float:left;
-  margin-left:10px;
+  font-size:13px;
+  left:10px;
+  right:10px;
+  text-align:left;
 }
 .navbar-default{
     background-color:#55acee;
@@ -61,4 +73,9 @@ body {
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
   color: #55acee;
   background-color:#fff;
+}
+
+#map-canvas{
+  margin-top:15px;
+  height:350px;
 }

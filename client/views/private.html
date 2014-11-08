@@ -1,13 +1,23 @@
 <template name="private">
   <div class="container">   
-    <div class="text-center">
-      <div class="col-md-9 col-lg-9 tweet-list">
+      <div class="col-md-8 col-lg-8 tweet-list">
+      <ul class="list-group">
+      	<li id="tag-name" class="list-group-item spacing"><h4>Title</h4></li>
+      </ul>		
       <ul class="list-group">
       	{{#each tweets}}
-      		<li class="list-group-item"><div class="tweet"><img class="photo" src={{profilePhoto}}/><span class="username">{{username}}</span><br/> <div class="tweet-text"> {{userTweet}}</div></div></li>
+      		<li class="list-group-item spacing"><div class="tweet"><img class="photo" src={{profilePhoto}}/><span class="username">{{username}}</span><br/> <div class="tweet-text"> {{userTweet}}</div></div></li>
       	{{/each}}
       </ul>
-  	</div>
+    </div>
+    <div class="col-md-3 col-lg-3 col-lg-offset-1 col-md-offset-1">
+    	<form role="form">
+			 <div class="form-group">
+			    <label for="exampleInputPassword1">Hashtag</label>
+			    <input type="text" class="form-control" id="hashtag" placeholder="#">
+			 </div>
+			 <button id="hashButton" type="button" class="btn btn-primary">Go</button>
+		</form>
     </div>
   </div>
 </template>

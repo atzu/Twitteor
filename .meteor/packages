@@ -17,4 +17,5 @@ accounts-twitter
 npm-container
 mrt:twit
 meteorhacks:npm
+mrt:googlemaps
 

@@ -17,5 +17,9 @@ Router.map(function() {
     this.route('private', {
         onBeforeAction: AccountsTemplates.ensureSignedIn
     });
+
+    this.route('mapping', {
+        onBeforeAction: AccountsTemplates.ensureSignedIn
+    });
 });
 

@@ -1,0 +1,21 @@
+<template name="mapping">
+  <div class="container">   
+      <div class="col-md-6 col-lg-6 tweet-list">
+      <ul class="list-group">
+      	<li id="currentPosition" class="list-group-item spacing"><h4>Title</h4></li>
+      </ul>		
+        <form role="form">
+       <button type="button" class="btn btn-primary">Go</button>
+    </form>
+    <div id="map-canvas"></div>
+    </div>
+    <div class="col-md-5 col-lg-5 col-lg-offset-1 col-md-offset-1">
+
+    <ul class="list-group">
+        {{#each tweets}}
+          <li class="list-group-item spacing"><div class="tweet"><img class="photo" src={{profilePhoto}}/><span class="username">{{username}}</span><br/> <div class="tweet-text"> {{userTweet}}</div></div></li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</template>

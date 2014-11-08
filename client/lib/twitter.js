@@ -1,5 +1,4 @@
   //Twitter calls
-  console.log('started');
   //Meteor.call("tweets", function(error, results) {
     //console.log(results); //results.data should be a JSON object
   //});
@@ -15,6 +14,16 @@ Template.private.helpers({
     }
 });
 
+Template.private.events({
+	'click #hashButton' : function(){
+		var hashtag=document.getElementById('hashtag').value;
+		var user_id=Meteor.userId();
+		Meteor.call('twitsByHashtag', user_id, hashtag , function(e, r) {
+			console.log('chiamato');
+    	});
+	}		
+	});
+
 // client code: ping heartbeat every 5 seconds
 Meteor.setInterval(function () {
 	console.log(Meteor.userId());
@@ -23,13 +32,14 @@ Meteor.setInterval(function () {
 
 Template.nav.events({
 'click #private': function (event) {
- Meteor.call('twitsByLocation', Meteor.userId(), function(e, r) {
- 		console.log('chiamato');
+var hashtag=document.getElementById('hashtag').value;
+var user_id=Meteor.userId();
+document.getElementById('tag-name').innerHTML=hashtag;
+ Meteor.call('twitsByHashtag', user_id, hashtag, function(e, r) {
       });
 },
-'click #home': function (event) {
- Meteor.call('kill', 1, function(e, r) {
- 		console.log('killato');
-      });
+'click #mapper': function (event) {
+	getLocation();
+	mapInit();
 }
 });
