@@ -22,6 +22,12 @@ Template.private.events({
 			console.log('chiamato');
     	});
     	$('#tag-name').html("Hashtag: "+hashtag);
+	},
+	'click #stopButton' : function(){
+		var user_id=Meteor.userId();
+		Meteor.call('stopStream', user_id, function(e, r) {
+			console.log('chiamato');
+    	});
 	}		
 	});
 

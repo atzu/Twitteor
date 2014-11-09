@@ -74,16 +74,13 @@
             if (!Streams.findOne({user_id : user_id})){
                 console.log('not found');
                 stream = T.stream('statuses/filter', { track: hashtag });
-                Streams.insert({user_id: user_id});
-                stream_array[user_id]=stream;
+                createStream(user_id);
             }else{
-               console.log('found users stream');
-               stream=stream_array[user_id];
-               stream.stop();
-               delete stream_array[user_id];
-               console.log('stopped');
+               console.log('found user\'s stream');
+               stopStream(user_id);
+               removeStream(user_id);
                stream = T.stream('statuses/filter', { track: hashtag });
-               stream_array[user_id]=stream;
+               createStream(user_id);
                console.log('reopened with hash, '+hashtag); 
             }
             stream.on('tweet', function (tweet, user_id) {
@@ -94,6 +91,13 @@
                 console.log(userName+" says "+userTweet+" at "+ creationDate);
 
             });
+
+        },
+
+         stopStream:  function(user_id){
+            console.log("Stop for: "+user_id);
+            stopStream(user_id);
+            removeStream(user_id);
 
         },
         
@@ -116,6 +120,27 @@
 });
 
 });
+
+
+//Stream Aux methods
+createStream = function (user_id){
+    Streams.insert({user_id: user_id}); //In database
+    stream_array[user_id]=stream; //In memory
+}
+
+stopStream = function(user_id){
+    if (Streams.findOne({user_id : user_id})){
+               console.log('found users stream');
+               stream=stream_array[user_id];
+               stream.stop();
+               console.log('stopped');
+            }
+} 
+
+removeStream = function(user_id){
+    delete stream_array[user_id];
+    Streams.remove({user_id : user_id});
+}
 
   // server code: clean up dead clients after 60 seconds
 Meteor.setInterval(function () {
