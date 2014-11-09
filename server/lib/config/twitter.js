@@ -44,6 +44,7 @@
             if (!Streams.findOne({user_id : user_id})){
                 console.log('stream not found');
                 stream = T.stream('statuses/filter', { locations: location });
+                stream.user_id=user_id;
                 createStream(user_id);
             }else{
                 console.log('found user\'s stream');
