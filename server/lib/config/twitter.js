@@ -40,6 +40,7 @@
       twitsByLocation:  function(user_id, location){
             console.log('ricevuto');
             console.log(user_id);
+            cleanGeoTweets(user_id);
             console.log(Connections.findOne({user_id : user_id}));
             if (!Streams.findOne({user_id : user_id})){
                 console.log('stream not found');
@@ -68,6 +69,7 @@
     },
     twitsByHashtag:  function(user_id, hashtag){
             console.log(user_id);
+            cleanTweets(user_id);
             console.log(Connections.findOne({user_id : user_id}));
             if (!Connections.findOne({user_id : user_id})){
                 Connections.insert({user_id: user_id});
@@ -147,6 +149,14 @@ stopStream = function(user_id){
 removeStream = function(user_id){
     delete stream_array[user_id];
     Streams.remove({user_id : user_id});
+}
+
+cleanTweets = function(user_id){
+    Tweets.remove({ user_id: user_id });
+}
+
+cleanGeoTweets = function(user_id){
+    GeoTweets.remove({ user_id: user_id });
 }
 
   // server code: clean up dead clients after 60 seconds
