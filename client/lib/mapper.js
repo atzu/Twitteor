@@ -9,8 +9,8 @@ GoogleMaps.init(
     }, 
     function(){
         var mapOptions = {
-            zoom: 13,
-            mapTypeId: google.maps.MapTypeId.SATELLITE
+            zoom: 10,
+            mapTypeId: google.maps.MapTypeId.MAP
         };
         map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions); 
         map.setCenter(new google.maps.LatLng( 35.363556, 138.730438 ));
@@ -22,7 +22,7 @@ setCenter= function(position){
 }
 
 getLocation=function() {
-	console.log('entrato');
+	console.log('trying to get local position');
     if (navigator.geolocation) {
         navigator.geolocation.watchPosition(showPosition);
     } else {

@@ -10,23 +10,23 @@ Meteor.subscribe('tweets');
 
 Template.private.helpers({
     'tweets': function(){
-        return Tweets.find({}, {sort: {"creationDate": -1}});
+        return Tweets.find({"user_id": Meteor.userId()}, {sort: {"creationDate": -1}});
     }
 });
 
 Template.private.events({
 	'click #hashButton' : function(){
-		var hashtag=document.getElementById('hashtag').value;
+		var hashtag=$('#hashtag').val();
 		var user_id=Meteor.userId();
 		Meteor.call('twitsByHashtag', user_id, hashtag , function(e, r) {
-			console.log('chiamato');
+			console.log('Hashtag start request');
     	});
     	$('#tag-name').html("Hashtag: "+hashtag);
 	},
 	'click #stopButton' : function(){
 		var user_id=Meteor.userId();
 		Meteor.call('stopStream', user_id, function(e, r) {
-			console.log('chiamato');
+			console.log('stop request');
     	});
 	}		
 	});
@@ -46,6 +46,10 @@ $('#tag-name').html("Hashtag: "+hashtag);
       });
 },
 'click #mapper': function (event) {
+	var user_id=Meteor.userId();
+	Meteor.call('stopStream', user_id, function(e, r) {
+			console.log('stop request');
+    	});
 	getLocation();
 	mapInit();
 }

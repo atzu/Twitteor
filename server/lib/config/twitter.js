@@ -1,14 +1,15 @@
  var stream_array=new Array();
 
  Meteor.publish('tweets', function(){
-        return Tweets.find({}, {sort: {"creationDate": -1}, limit: 20});
+        return Tweets.find({ user_id: this.userId }, {sort: {"creationDate": -1}, limit: 20});
     });
 
 
     Meteor.startup(function () {
     // code to run on server at startup
-    var wrappedInsert = Meteor.bindEnvironment(function(tweet, user_id) {
-    Tweets.insert({"username": tweet.user.screen_name , "userTweet" : tweet.text, "profilePhoto": tweet.user.profile_image_url, "creationDate" : tweet.created_at, "user_id" : user_id});
+    var wrappedInsert = Meteor.bindEnvironment(function(tweet, user_id, hashtag) {
+    console.log("Tweet inserted for :"+user_id);    
+    Tweets.insert({"username": tweet.user.screen_name , "userTweet" : tweet.text, "profilePhoto": tweet.user.profile_image_url, "creationDate" : tweet.created_at, "user_id" : user_id, "hashtag" : hashtag});
   }, "Failed to insert tweet into Posts collection.");
     Connections.remove({});
     Streams.remove({});
@@ -80,15 +81,16 @@
                stopStream(user_id);
                removeStream(user_id);
                stream = T.stream('statuses/filter', { track: hashtag });
+               stream.user_id=user_id;
                createStream(user_id);
                console.log('reopened with hash, '+hashtag); 
             }
-            stream.on('tweet', function (tweet, user_id) {
+            stream.on('tweet', function (tweet,hashtag) {
                 userName = tweet.user.screen_name;
                 userTweet = tweet.text;
                 creationDate = tweet.created_at;
-                wrappedInsert(tweet, user_id);
-                console.log(userName+" says "+userTweet+" at "+ creationDate);
+                wrappedInsert(tweet, user_id, hashtag);
+                console.log("USER_ID: "+stream.user_id+" "+userName+" says "+userTweet+" at "+ creationDate);
 
             });
 
