@@ -4,12 +4,20 @@
         return Tweets.find({ user_id: this.userId }, {sort: {"creationDate": -1}, limit: 20});
     });
 
+ Meteor.publish('geotweets', function(){
+        return GeoTweets.find({ user_id: this.userId }, {sort: {"creationDate": -1}, limit: 20});
+    });
 
     Meteor.startup(function () {
     // code to run on server at startup
     var wrappedInsert = Meteor.bindEnvironment(function(tweet, user_id, hashtag) {
     console.log("Tweet inserted for :"+user_id);    
     Tweets.insert({"username": tweet.user.screen_name , "userTweet" : tweet.text, "profilePhoto": tweet.user.profile_image_url, "creationDate" : tweet.created_at, "user_id" : user_id, "hashtag" : hashtag});
+  }, "Failed to insert tweet into Posts collection.");
+
+    var wrappedInsertGeo = Meteor.bindEnvironment(function(tweet, user_id, city) {
+    console.log("GeoTweet inserted for :"+user_id);    
+    GeoTweets.insert({"username": tweet.user.screen_name , "userTweet" : tweet.text, "profilePhoto": tweet.user.profile_image_url, "creationDate" : tweet.created_at, "user_id" : user_id, "city" : city});
   }, "Failed to insert tweet into Posts collection.");
     Connections.remove({});
     Streams.remove({});
@@ -29,36 +37,32 @@
 
      Meteor.methods({
 
-      twitsByLocation:  function(user_id){
+      twitsByLocation:  function(user_id, location){
+            console.log('ricevuto');
             console.log(user_id);
             console.log(Connections.findOne({user_id : user_id}));
-            if (!Connections.findOne({user_id : user_id})){
-                Connections.insert({user_id: user_id});
-                console.log('inserito');
-                console.log('entrato');
-                var Twit = Meteor.npmRequire('twit');
-                var conf = JSON.parse(Assets.getText('api_keys.json'));
-                var T = new Twit({
-                    consumer_key: conf.consumer_key,
-                    consumer_secret: conf.consumer_secret,
-                    access_token: conf.access_token,
-                    access_token_secret: conf.access_token_secret
-            });
+            if (!Streams.findOne({user_id : user_id})){
+                console.log('stream not found');
+                stream = T.stream('statuses/filter', { locations: location });
+                createStream(user_id);
+            }else{
+                console.log('found user\'s stream');
+                stopStream(user_id);
+                removeStream(user_id);
+                stream = T.stream('statuses/filter', { locations: location });
+                stream.user_id=user_id;
+                createStream(user_id);
+            }
 
-            var city_area = [  '-122.75', '36.8', '-121.75', '37.8' ]
-
-            stream = T.stream('statuses/filter', { locations: city_area });
-
-            stream.on('tweet', function (tweet, user_id) {
+            stream.on('tweet', function (tweet, city) {
                 userName = tweet.user.screen_name;
                 userTweet = tweet.text;
                 creationDate = tweet.created_at;
-                wrappedInsert(tweet, user_id);
+                wrappedInsertGeo(tweet, user_id);
                 console.log(userName+" says "+userTweet+" at "+ creationDate);
 
             
             });
-        }
         
     },
     twitsByHashtag:  function(user_id, hashtag){
@@ -73,7 +77,7 @@
             if (hashtag.length==0)
                 hashtag='#realmadrid';
             if (!Streams.findOne({user_id : user_id})){
-                console.log('not found');
+                console.log('stream not found');
                 stream = T.stream('statuses/filter', { track: hashtag });
                 createStream(user_id);
             }else{

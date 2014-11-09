@@ -2,17 +2,23 @@
   <div class="container">   
       <div class="col-md-6 col-lg-6 tweet-list">
       <ul class="list-group">
-      	<li id="currentPosition" class="list-group-item spacing"><h4>Title</h4></li>
+      	<li id="currentPosition" class="list-group-item spacing"><span><h4 id="city-name">Turin</h4></span><span id="city-coords"></span></li>
       </ul>		
         <form role="form">
-       <button type="button" class="btn btn-primary">Go</button>
+          <div class="input-group">
+            <input id="city" type="text" class="form-control">
+            <span class="input-group-btn">
+              <button id="map-search" class="btn btn-primary" type="button">Go!</button>
+              <button id="stream-stop" type="button" class="btn btn-danger">Stop</button>
+            </span>
+          </div><!-- /input-group -->
+          
     </form>
     <div id="map-canvas"></div>
     </div>
-    <div class="col-md-5 col-lg-5 col-lg-offset-1 col-md-offset-1">
-
-    <ul class="list-group">
-        {{#each tweets}}
+    <div class="col-md-6 col-lg-6 tweet-list">
+      <ul class="list-group">
+        {{#each geotweets}}
           <li class="list-group-item spacing"><div class="tweet"><img class="photo" src={{profilePhoto}}/><span class="username">{{username}}</span><br/> <div class="tweet-text"> {{userTweet}}</div></div></li>
         {{/each}}
       </ul>

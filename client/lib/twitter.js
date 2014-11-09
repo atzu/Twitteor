@@ -3,6 +3,7 @@
     //console.log(results); //results.data should be a JSON object
   //});
 
+var hashtag;
 
 
 Meteor.subscribe('tweets');
@@ -10,7 +11,7 @@ Meteor.subscribe('tweets');
 
 Template.private.helpers({
     'tweets': function(){
-        return Tweets.find({"user_id": Meteor.userId()}, {sort: {"creationDate": -1}});
+        return Tweets.find({"user_id": Meteor.userId(), "hashtag" : hashtag}, {sort: {"creationDate": -1}});
     }
 });
 
@@ -39,7 +40,7 @@ Meteor.setInterval(function () {
 
 Template.nav.events({
 'click #private': function (event) {
-var hashtag=document.getElementById('hashtag').value;
+hashtag=document.getElementById('hashtag').value;
 var user_id=Meteor.userId();
 $('#tag-name').html("Hashtag: "+hashtag);
  Meteor.call('twitsByHashtag', user_id, hashtag, function(e, r) {
