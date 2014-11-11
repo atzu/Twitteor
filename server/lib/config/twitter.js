@@ -1,4 +1,4 @@
- var stream_array=new Array();
+_keys var stream_array=new Array();
 
  Meteor.publish('tweets', function(){
         return Tweets.find({ user_id: this.userId }, {sort: {"creationDate": -1}, limit: 20});
@@ -11,12 +11,12 @@
     Meteor.startup(function () {
     // code to run on server at startup
     var wrappedInsert = Meteor.bindEnvironment(function(tweet, user_id, hashtag) {
-    console.log("Tweet inserted for :"+user_id);    
+    console.log("Tweet inserted for :"+user_id);
     Tweets.insert({"username": tweet.user.screen_name , "userTweet" : tweet.text, "profilePhoto": tweet.user.profile_image_url, "creationDate" : tweet.created_at, "user_id" : user_id, "hashtag" : hashtag});
   }, "Failed to insert tweet into Posts collection.");
 
     var wrappedInsertGeo = Meteor.bindEnvironment(function(tweet, user_id, city) {
-    console.log("GeoTweet inserted for :"+user_id);    
+    console.log("GeoTweet inserted for :"+user_id);
     GeoTweets.insert({"username": tweet.user.screen_name , "userTweet" : tweet.text, "profilePhoto": tweet.user.profile_image_url, "creationDate" : tweet.created_at, "user_id" : user_id, "city" : city});
   }, "Failed to insert tweet into Posts collection.");
     Connections.remove({});
@@ -29,7 +29,7 @@
         access_token: conf.access_token,
         access_token_secret: conf.access_token_secret
     });
-   
+
 
 
 
@@ -63,9 +63,9 @@
                 wrappedInsertGeo(tweet, user_id);
                 console.log(userName+" says "+userTweet+" at "+ creationDate);
 
-            
+
             });
-        
+
     },
     twitsByHashtag:  function(user_id, hashtag){
             console.log(user_id);
@@ -90,7 +90,7 @@
                stream = T.stream('statuses/filter', { track: hashtag });
                stream.user_id=user_id;
                createStream(user_id);
-               console.log('reopened with hash, '+hashtag); 
+               console.log('reopened with hash, '+hashtag);
             }
             stream.on('tweet', function (tweet,hashtag) {
                 userName = tweet.user.screen_name;
@@ -109,7 +109,7 @@
             removeStream(user_id);
 
         },
-        
+
 
       // server code: heartbeat method
 
@@ -144,7 +144,7 @@ stopStream = function(user_id){
                stream.stop();
                console.log('stopped');
             }
-} 
+}
 
 removeStream = function(user_id){
     delete stream_array[user_id];
@@ -165,5 +165,4 @@ Meteor.setInterval(function () {
   Connections.find({last_seen: {$lt: (now - 60 * 1000)}}).forEach(function (user) {
     // do something here for each idle user
   });
-}); 
-
+});
