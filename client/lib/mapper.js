@@ -9,11 +9,16 @@ var address="Oviedo";
 Meteor.subscribe('geotweets');
 
 
+
+
 Template.mapping.helpers({
     'geotweets': function(){
+      console.log('added');
         return GeoTweets.find({"user_id": Meteor.userId()}, {sort: {"creationDate": -1}});
-    }
+      }
 });
+
+
 
 mapInit = function(){
 GoogleMaps.init(
@@ -65,8 +70,8 @@ showPosition=function(position) {
     console.log(bounds_area);
     setCenter(latlng);
     user_id=Meteor.userId();
-    Meteor.call('twitsByLocation', user_id, bounds_area, function(e, r) {
-      });
+    //Meteor.call('twitsByLocation', user_id, bounds_area, function(e, r) {
+      //});
 }
 
 composeBounds= function(bounds){
@@ -77,7 +82,7 @@ composeBounds= function(bounds){
 	user_id=Meteor.userId();
 	Meteor.call('twitsByLocation', user_id, bounds_area, function(e, r) {
       });
-
+  update();
 }
 
 updateBanners= function(city, position){
@@ -87,6 +92,16 @@ updateBanners= function(city, position){
     $('#city-name').html(city);
 }
 
+showMarker = function(latlng){
+
+// To add the marker to the map, use the 'map' property
+var marker = new google.maps.Marker({
+    position: latlng,
+    map: map,
+    animation: google.maps.Animation.DROP
+
+});
+}
 
 Template.mapping.events({
 'click #map-search': function (event) {
@@ -113,3 +128,14 @@ Template.mapping.events({
 		stopStream();
 	}
 });
+
+update = function(){
+GeoTweetsCursor =GeoTweets.find({});
+GeoTweetsCursor.observe({
+    added: function(item){
+        console.log('added element'+item.lat);
+        showMarker(new google.maps.LatLng(item.lat, item.lng))
+    }
+}); 
+}
+

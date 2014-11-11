@@ -19,6 +19,9 @@ Template.private.events({
 	'click #hashButton' : function(){
 		var hashtag=$('#hashtag').val();
 		var user_id=Meteor.userId();
+		Meteor.call('stopStream', user_id, function(e, r) {
+			console.log('stop request');
+    	});
 		Meteor.call('twitsByHashtag', user_id, hashtag , function(e, r) {
 			console.log('Hashtag start request');
     	});

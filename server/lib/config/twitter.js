@@ -1,4 +1,4 @@
-_keys var stream_array=new Array();
+ var stream_array=new Array();
 
  Meteor.publish('tweets', function(){
         return Tweets.find({ user_id: this.userId }, {sort: {"creationDate": -1}, limit: 20});
@@ -17,7 +17,8 @@ _keys var stream_array=new Array();
 
     var wrappedInsertGeo = Meteor.bindEnvironment(function(tweet, user_id, city) {
     console.log("GeoTweet inserted for :"+user_id);
-    GeoTweets.insert({"username": tweet.user.screen_name , "userTweet" : tweet.text, "profilePhoto": tweet.user.profile_image_url, "creationDate" : tweet.created_at, "user_id" : user_id, "city" : city});
+    console.log(tweet.coordinates.coordinates);
+    GeoTweets.insert({"username": tweet.user.screen_name , "userTweet" : tweet.text, "profilePhoto": tweet.user.profile_image_url, "creationDate" : tweet.created_at, "user_id" : user_id, "city" : city, "lat" : tweet.coordinates.coordinates[1], "lng" : tweet.coordinates.coordinates[0]});
   }, "Failed to insert tweet into Posts collection.");
     Connections.remove({});
     Streams.remove({});
