@@ -14,7 +14,7 @@ Router.map(function() {
         path: '/',
     });
 
-    this.route('private', {
+    this.route('hashtag', {
         onBeforeAction: AccountsTemplates.ensureSignedIn
     });
 
@@ -22,4 +22,3 @@ Router.map(function() {
         onBeforeAction: AccountsTemplates.ensureSignedIn
     });
 });
-

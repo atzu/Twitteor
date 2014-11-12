@@ -9,13 +9,13 @@ var hashtag;
 Meteor.subscribe('tweets');
 
 
-Template.private.helpers({
+Template.hashtag.helpers({
     'tweets': function(){
         return Tweets.find({"user_id": Meteor.userId(), "hashtag" : hashtag}, {sort: {"creationDate": -1}});
     }
 });
 
-Template.private.events({
+Template.hashtag.events({
 	'click #hashButton' : function(){
 		var hashtag=$('#hashtag').val();
 		var user_id=Meteor.userId();
@@ -32,7 +32,7 @@ Template.private.events({
 		Meteor.call('stopStream', user_id, function(e, r) {
 			console.log('stop request');
     	});
-	}		
+	}
 	});
 
 // client code: ping heartbeat every 5 seconds
