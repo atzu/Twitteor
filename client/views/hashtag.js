@@ -22,7 +22,7 @@ Template.hashtag.events({
 		Meteor.call('stopStream', user_id, function(e, r) {
 			console.log('stop request');
     	});
-		Meteor.call('twitsByHashtag', user_id, hashtag , function(e, r) {
+		Meteor.call('twitsByHashtag', user_id, hashtag, function(e, r) {
 			console.log('Hashtag start request');
     	});
     	$('#tag-name').html("Hashtag: "+hashtag);
