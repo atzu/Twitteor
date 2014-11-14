@@ -4,7 +4,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-mizzao:bootstrap-3
 zimme:iron-router-active
 accounts-password
 less
@@ -12,10 +11,11 @@ useraccounts:bootstrap
 service-configuration
 accounts-ui
 accounts-twitter
+peernohell:c3
 
 
 npm-container
 mrt:twit
 meteorhacks:npm
 mrt:googlemaps
-
+html5cat:bootstrap-material-design
