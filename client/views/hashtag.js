@@ -17,7 +17,7 @@ Template.hashtag.helpers({
 
 Template.hashtag.events({
 	'click #hashButton' : function(){
-		var hashtag=$('#hashtag').val();
+		var hashtag=$('#hashtag-input').val();
 		var user_id=Meteor.userId();
 		Meteor.call('stopStream', user_id, function(e, r) {
 			console.log('stop request');

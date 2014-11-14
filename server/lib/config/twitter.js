@@ -71,6 +71,7 @@
     twitsByHashtag:  function(user_id, hashtag){
             console.log(user_id);
             cleanTweets(user_id);
+            console.log(hashtag);
             console.log(Connections.findOne({user_id : user_id}));
             if (!Connections.findOne({user_id : user_id})){
                 Connections.insert({user_id: user_id});
