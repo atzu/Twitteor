@@ -88,6 +88,17 @@ kill: function (user_id){
     if (Connections.findOne(user_id)){
         Connections.delete({user_id: user_id});
     }
+},
+trends: function (place, user_id){
+    T.get('trends/place', { id: 1 }, function (err, data, response) {
+    console.log(data[0].locations[0].name);
+    trends=data[0].trends;
+    console.log(data[0].trends[0].name);
+    wrappedCleanTrendsForUser(user_id);
+    trends.forEach(function(item){
+        wrappedInsertTrend(item, user_id);
+    });
+});
 }
 
 

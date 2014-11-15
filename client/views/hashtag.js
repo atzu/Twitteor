@@ -42,12 +42,20 @@ Meteor.setInterval(function () {
 }, 5000);
 
 Template.nav.events({
-'click #private': function (event) {
-hashtag=document.getElementById('hashtag').value;
-var user_id=Meteor.userId();
-$('#tag-name').html("Hashtag: "+hashtag);
- Meteor.call('twitsByHashtag', user_id, hashtag, function(e, r) {
-      });
+'click #home': function (event) {
+	var user_id=Meteor.userId();
+	Meteor.call('stopStream', user_id, function(e, r) {
+				console.log('stop request');
+	    	});
+	Meteor.call('trends', 1 , user_id, function(e, r) {
+				console.log('trends request');
+	    	});
+},
+'click #hashtag': function (event) {
+	var user_id=Meteor.userId();
+	Meteor.call('stopStream', user_id, function(e, r) {
+				console.log('stop request');
+	    	});
 },
 'click #mapper': function (event) {
 	var user_id=Meteor.userId();

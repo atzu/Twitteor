@@ -1,8 +1,12 @@
 <template name="home">
   <div class="container">
-    <div class="text-center">
-      <h1>Welcome to Twitteor!</h1>
-      <img src="https://pbs.twimg.com/profile_images/527039622434418688/uJPMDhZq_400x400.png" style="height:250px;"/>
-    </div>
+  	<h4>Twitter Trends</h4>
   </div>
+  <ul id="trend-list" class="list-group" style="margin-left: 50px;margin-right:50px;">
+  	{{#each trends}}
+  	<li class="list-group-item"><h6>{{name}}</h6><div class="progress progress-animated">
+    <div class="progress-bar progress-bar-info" style="width: 80%"></div>
+</div></li>
+  	{{/each}}
+  </ul>
 </template>

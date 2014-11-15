@@ -4,11 +4,20 @@
       <ul class="list-group">
       	<li  class="list-group-item spacing"><h4 id="tag-name">Hashtag #</h4></li>
       </ul>
-      <ul class="list-group">
-      	{{#each tweets}}
-      		<li class="list-group-item spacing"><div class="tweet"><img class="photo" src={{profilePhoto}}/><span class="username">{{username}}</span><br/> <div class="tweet-text"> {{userTweet}}</div></div></li>
-      	{{/each}}
-      </ul>
+        <div class="list-group">
+          {{#each tweets}}
+            <div class="list-group-item">
+              <div class="row-picture">
+                <img class="circle" src={{profilePhoto}} alt="icon">
+              </div>
+              <div class="row-content">
+                <h4 class="list-group-item-heading">{{username}}</h4>
+                <p class="list-group-item-text">{{userTweet}}</p>
+              </div>
+            </div>
+            <div class="list-group-separator"></div>
+          {{/each}}
+        </div>
     </div>
     <div class="col-md-3 col-lg-3 col-lg-offset-1 col-md-offset-1">
     	<form role="form">
