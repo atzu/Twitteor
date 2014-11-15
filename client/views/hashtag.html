@@ -1,5 +1,15 @@
 <template name="hashtag">
   <div class="container">
+    <div class="col-md-3 col-lg-3 col-lg-offset-1 col-md-offset-1">
+      <form role="form">
+       <div class="form-group">
+          <label for="exampleInputPassword1">Hashtag</label>
+          <input type="text" class="form-control" id="hashtag-input" value={{selectedHash}} placeholder="#">
+       </div>
+       <button id="hashButton" type="button" class="btn btn-primary">Go</button>
+       <button id="stopButton" type="button" class="btn btn-danger">Stop</button>
+    </form>
+    </div>
       <div class="col-md-8 col-lg-8 tweet-list">
       <ul class="list-group">
       	<li  class="list-group-item spacing"><h4 id="tag-name">Hashtag #</h4></li>
@@ -18,16 +28,6 @@
             <div class="list-group-separator"></div>
           {{/each}}
         </div>
-    </div>
-    <div class="col-md-3 col-lg-3 col-lg-offset-1 col-md-offset-1">
-    	<form role="form">
-			 <div class="form-group">
-			    <label for="exampleInputPassword1">Hashtag</label>
-			    <input type="text" class="form-control" id="hashtag-input" value={{selectedHash}} placeholder="#">
-			 </div>
-			 <button id="hashButton" type="button" class="btn btn-primary">Go</button>
-			 <button id="stopButton" type="button" class="btn btn-danger">Stop</button>
-		</form>
     </div>
   </div>
 </template>

@@ -4,12 +4,12 @@ chartCols=[];
 
 Template.home.helpers({
     'trends': function(){
-        return Trends.find({"user_id": Meteor.userId()}, {sort: {"creationDate": -1}});
+        return Trends.find({"user_id": Meteor.userId()});
     }
 });
 
 columns = function(){
-	var items= Trends.find({}, {sort:{"creationDate" : -1}, limit: 3}).fetch();
+	var items= Trends.find({}).fetch();
 	var cols="";
 	names=[];
 	items.forEach(function (item){
@@ -27,7 +27,7 @@ chart = function() {
 	var chart = c3.generate({
     data: {
         columns: chartCols,
-		type: 'spline'
+		type: 'bar'
     }
 });
 
@@ -35,12 +35,15 @@ chart = function() {
 
 Meteor.setInterval(function () {
 chartCols.forEach(function (item){
+	if (item.length>1){
+		item.splice(1, 1);
+	}
 	item.push(Math.floor((Math.random() * 10) + 1));
 });	
 chart.load({
   columns: chartCols
 });
   ;
-}, 5000);
+}, 3000);
 
 }

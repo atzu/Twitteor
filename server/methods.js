@@ -100,6 +100,25 @@ trends: function (place, user_id){
     });
 });
 }
+// streamTrends: function(user_id){
+//         console.log('ricevuto');
+//         console.log(user_id);
+//         cleanStreams(user_id);
+//         stream = T.stream('statuses/filter', { track: hashtag });
+//         stream.user_id=user_id;
+//         createStream(user_id);
+
+
+//         stream.on('tweet', function (tweet, city) {
+//             userName = tweet.user.screen_name;
+//             userTweet = tweet.text;
+//             creationDate = tweet.created_at;
+//             wrappedInsertGeo(tweet, user_id);
+//             console.log(userName+" says "+userTweet+" at "+ creationDate);
+
+
+//         });
+// }
 
 
 
