@@ -15,10 +15,16 @@ Router.map(function() {
     });
 
     this.route('hashtag', {
+        data:function (){ 
+            var selectedHash=this.params.hash;
+            console.log(this.params.hash);
+            return {"selectedHash" : selectedHash};
+       
+    },
         onBeforeAction: AccountsTemplates.ensureSignedIn
     });
 
-    this.route('mapping', {
+    this.route('mapping',  {
         onBeforeAction: AccountsTemplates.ensureSignedIn
     });
 });

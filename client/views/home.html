@@ -4,7 +4,7 @@
   </div>
   <ul id="trend-list" class="list-group" style="margin-left: 50px;margin-right:50px;">
   	{{#each trends}}
-  	<li class="list-group-item"><h6>{{name}}</h6><div class="progress progress-animated">
+  	<li class="list-group-item"><a href="{{pathFor 'hashtag' hash=this.name}}"><h6>{{name}}</h6></a><div class="progress progress-animated">
     <div class="progress-bar progress-bar-info" style="width: 80%"></div>
 </div></li>
   	{{/each}}
