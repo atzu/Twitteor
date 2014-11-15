@@ -11,7 +11,6 @@ useraccounts:bootstrap
 service-configuration
 accounts-ui
 accounts-twitter
-peernohell:c3
 
 
 npm-container
@@ -19,3 +18,5 @@ mrt:twit
 meteorhacks:npm
 mrt:googlemaps
 html5cat:bootstrap-material-design
+peernohell:c3
+

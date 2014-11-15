@@ -1,12 +1,19 @@
 <template name="home">
-  <div class="container">
-  	<h4>Twitter Trends</h4>
-  </div>
+  	<h4 style="margin-left: 50px;margin-right:50px;">Twitter Trends</h4>
+  <div class="container col-md-6 col-lg-6">
   <ul id="trend-list" class="list-group" style="margin-left: 50px;margin-right:50px;">
   	{{#each trends}}
-  	<li class="list-group-item"><a href="{{pathFor 'hashtag' hash=this.name}}"><h6>{{name}}</h6></a><div class="progress progress-animated">
-    <div class="progress-bar progress-bar-info" style="width: 80%"></div>
-</div></li>
+  	<li class="list-group-item"><a href="{{pathFor 'hashtag' hash=this.name}}">
+  		<h6>{{name}}</h6></a>
+  		<div class="progress progress-animated">
+    		<div class="progress-bar progress-bar-info" style="width: 80%">
+    		</div>
+		</div>
+	</li>
   	{{/each}}
   </ul>
+  </div>
+  <div id="chartcontainer" class="col-md-6 col-lg-6">
+  	<div id="chart"></div>
+  </div>
 </template>

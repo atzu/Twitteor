@@ -50,6 +50,7 @@ Template.nav.events({
 	Meteor.call('trends', 1 , user_id, function(e, r) {
 				console.log('trends request');
 	    	});
+	chart();
 },
 'click #hashtag': function (event) {
 	var user_id=Meteor.userId();

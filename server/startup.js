@@ -32,7 +32,8 @@ Meteor.startup(function () {
         Trends.insert({
             "name": trend.name,
             "url": trend.url,
-            "user_id": user_id
+            "user_id": user_id,
+            "creationDate": new Date()
         });
     }, "Failed to insert tweet into Trends collection.");
 

@@ -7,5 +7,5 @@ Meteor.publish('geotweets', function(){
    });
 
 Meteor.publish('trends', function(){
-       return Trends.find({ user_id: this.userId }, {sort: {"creationDate": -1}, limit: 10});
+       return Trends.find({ user_id: this.userId });
    });
